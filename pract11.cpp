@@ -43,8 +43,11 @@ DWORD WINAPI Logger(DWORD priority)
 
 		strcpy_s(log.message, logs[rand() % 5]);
 
-		buffer.records[buffer.index] = log;
-		buffer.index++;
+		if (buffer.index <= MAX_LOGS)
+		{
+			buffer.records[buffer.index] = log;
+			buffer.index++;
+		}
 
 		if (csUse)
 		{
@@ -126,8 +129,8 @@ int main() //логи теряются и выводятся не все, с к�
 	WaitForSingleObject(lowPriorityLogger, INFINITE);
 	WaitForSingleObject(watcher, INFINITE);
 
-	CloseHandle(highPriorityLogger);
-	CloseHandle(normalPriorityLogger);
 	CloseHandle(lowPriorityLogger);
+	CloseHandle(normalPriorityLogger);
+	CloseHandle(highPriorityLogger);
 	CloseHandle(watcher);
 }
