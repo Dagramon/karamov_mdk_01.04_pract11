@@ -5,6 +5,7 @@
 #define MAX_LOGS 1000
 #define MAX_TEXT 128
 char logs[][MAX_TEXT] = {"log1","log2","log3","log4","log5"};
+bool csUse = false;
 DWORD tick = GetTickCount64();
 
 struct LogRecord
@@ -30,8 +31,10 @@ DWORD WINAPI Logger(DWORD priority)
 	srand(time(NULL));
 	while (buffer.index <= MAX_LOGS)
 	{
-
-		EnterCriticalSection(&cs);
+		if (csUse)
+		{
+			EnterCriticalSection(&cs);
+		}
 
 		LogRecord log;
 		log.threadId = GetCurrentThreadId();
@@ -43,7 +46,10 @@ DWORD WINAPI Logger(DWORD priority)
 		buffer.records[buffer.index] = log;
 		buffer.index++;
 
-		LeaveCriticalSection(&cs);
+		if (csUse)
+		{
+			LeaveCriticalSection(&cs);
+		}
 
 		Sleep(rand() % 100 + 10);
 	};
@@ -53,7 +59,10 @@ DWORD WINAPI Watcher()
 {
 	do
 	{
-		EnterCriticalSection(&cs);
+		if (csUse)
+		{
+			EnterCriticalSection(&cs);
+		}
 		int index = buffer.index - 5;
 		for (int i = 0; i < 5; i++)
 		{
@@ -67,7 +76,10 @@ DWORD WINAPI Watcher()
 				std::endl;
 		}
 		std::cout << std::endl;
-		LeaveCriticalSection(&cs);
+		if (csUse)
+		{
+			LeaveCriticalSection(&cs);
+		}
 		Sleep(100);
 	} while (buffer.index <= MAX_LOGS);
 
@@ -79,7 +91,13 @@ int main() //логи теряются и выводятся не все, с к�
 
 	InitializeCriticalSection(&cs);
 
-	std::cout << "e to stop" << std::endl;
+	char selection;
+	std::cout << "use critical section 0-false, 1-true" << std::endl;
+	selection = _getch();
+	if (selection == '1')
+	{
+		csUse = true;
+	}
 
 	DWORD IDThread1, IDThread2, IDThread3, IDThread4;
 	HANDLE highPriorityLogger = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)Logger, (void*)THREAD_PRIORITY_HIGHEST, 0, &IDThread1);

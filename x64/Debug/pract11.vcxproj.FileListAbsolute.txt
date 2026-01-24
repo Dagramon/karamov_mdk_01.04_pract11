@@ -1,1 +1,2 @@
 C:\Users\st310-03\Documents\karamov\pract11\x64\Debug\pract11.exe
+C:\Users\st310-03\Source\Repos\karamov_mdk_01.04_pract11\x64\Debug\pract11.exe

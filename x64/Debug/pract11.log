@@ -1,5 +1,5 @@
 ﻿  pract11.cpp
-C:\Users\st310-03\Documents\karamov\pract11\pract11.cpp(8,12): warning C4244: инициализация: преобразование "ULONGLONG" в "DWORD", возможна потеря данных
-C:\Users\st310-03\Documents\karamov\pract11\pract11.cpp(29,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-C:\Users\st310-03\Documents\karamov\pract11\pract11.cpp(35,31): warning C4244: =: преобразование "ULONGLONG" в "DWORD", возможна потеря данных
-  pract11.vcxproj -> C:\Users\st310-03\Documents\karamov\pract11\x64\Debug\pract11.exe
+C:\Users\st310-03\Source\Repos\karamov_mdk_01.04_pract11\pract11.cpp(9,12): warning C4244: инициализация: преобразование "ULONGLONG" в "DWORD", возможна потеря данных
+C:\Users\st310-03\Source\Repos\karamov_mdk_01.04_pract11\pract11.cpp(31,12): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Users\st310-03\Source\Repos\karamov_mdk_01.04_pract11\pract11.cpp(42,31): warning C4244: =: преобразование "ULONGLONG" в "DWORD", возможна потеря данных
+  pract11.vcxproj -> C:\Users\st310-03\Source\Repos\karamov_mdk_01.04_pract11\x64\Debug\pract11.exe
